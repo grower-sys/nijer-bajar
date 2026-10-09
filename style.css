@@ -960,3 +960,41 @@ z-index: 1000;
         margin-right: auto;
     }
 }
+
+
+/* MOBILE HEADER FIX */
+@media (max-width: 768px) {
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .header .logo {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .header .logo img {
+        display: block;
+        width: 180px;
+        height: 45px;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+
+    .header .nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
