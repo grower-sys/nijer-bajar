@@ -943,12 +943,12 @@ z-index: 1000;
     display: block;
 }
 
-/* MOBILE LOGO */
+/* MOBILE LOGO - CENTER ALIGN */
 @media (max-width: 768px) {
     .logo {
         margin-left: 0;
         width: 100%;
-        text-align: left;
+        text-align: center;
     }
 
     .logo img {
@@ -956,5 +956,7 @@ z-index: 1000;
         height: 45px;
         object-fit: contain;
         display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
