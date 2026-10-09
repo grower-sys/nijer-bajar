@@ -869,3 +869,93 @@ if (productGrid) {
     });
 
 }
+
+
+/* =========================
+   WHATSAPP ORDER
+========================= */
+
+const whatsappOrderButton =
+    document.getElementById('whatsapp-order-btn');
+
+if (whatsappOrderButton) {
+
+    whatsappOrderButton.addEventListener('click', function() {
+
+        const form = document.querySelector('.customer-form form');
+
+        if (!form || !form.reportValidity()) {
+            return;
+        }
+
+        if (cart.length === 0) {
+            alert('Please add products to your cart.');
+            return;
+        }
+
+        const name = document.getElementById('name').value.trim();
+        const mobile = document.getElementById('mobile').value.trim();
+        const division = document.getElementById('division').value;
+        const district = document.getElementById('district').value;
+        const area = document.getElementById('area').value.trim();
+        const address = document.getElementById('address').value.trim();
+
+        if (!name || !mobile || !division ||
+            !district || !area || !address) {
+            alert('Please complete your customer information.');
+            return;
+        }
+
+        const deliveryCharge = getDeliveryCharge();
+
+        const deliveryText = deliveryCharge === 120
+            ? 'Outside Dhaka'
+            : 'Inside Dhaka';
+
+        let subtotal = 0;
+
+        const productList = cart.map(function(product, index) {
+
+            const price = Number(
+                String(product.price).replace(/[^\d.]/g, '')
+            );
+
+            subtotal += price;
+
+            return `${index + 1}. ${product.name} - ${product.price} (Qty: 1)`;
+
+        }).join('\n');
+
+        const total = subtotal + deliveryCharge;
+
+        const message = [
+            '*NEW ORDER - NIJER BAJAR*',
+            '',
+            '*Customer Information*',
+            `Name: ${name}`,
+            `Mobile: ${mobile}`,
+            `Division: ${division}`,
+            `District: ${district}`,
+            `Area: ${area}`,
+            `Address: ${address}`,
+            '',
+            '*Ordered Products*',
+            productList,
+            '',
+            `Subtotal: BDT ${subtotal}`,
+            `Delivery: ${deliveryText} - BDT ${deliveryCharge}`,
+            `Total: BDT ${total}`,
+            '',
+            'Payment: Cash on Delivery'
+        ].join('\n');
+
+        // Replace with your business WhatsApp number
+        const whatsappNumber = '8801896140043';
+
+        const whatsappURL =
+            `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+        window.location.href = whatsappURL;
+
+    });
+}
